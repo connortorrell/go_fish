@@ -1,9 +1,8 @@
 class Person
-  attr_reader :name, :player, :client
+  attr_reader :client, :player
 
-  def initialize(client, name)
+  def initialize(client, player)
     @client = client
-    @name = name
-    @player = Player.new(name)
+    @player = player
   end
 end
