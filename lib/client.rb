@@ -3,7 +3,7 @@ require 'socket'
 class Client
   attr_reader :socket, :output
 
-  def initialize(network, port)
+  def initialize(network = "localhost", port = 3336)
     @socket = TCPSocket.new(network, port)
   end
 
