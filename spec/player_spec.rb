@@ -4,7 +4,7 @@ describe 'Player' do
   let(:player) { Player.new("Connor", [Card.new("ace"), Card.new("ace"), Card.new("ace"), Card.new("ace")]) }
 
   it "gives an ace" do
-    expect(player.give_cards("ace")).to eq([Card.new("ace")])
+    expect(player.give_cards("ace")).to eq([Card.new("ace"), Card.new("ace"), Card.new("ace"), Card.new("ace")])
     expect(player.has_card?("ace")).to eq(false)
   end
 

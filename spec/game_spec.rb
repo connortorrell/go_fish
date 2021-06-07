@@ -22,9 +22,9 @@ describe 'Game' do
   end
 
   it "gives ace from asked_player to asking_player" do
-    asking_player = Player.new("Connor", [Card.new("ace"), Card.new("ace"), Card.new("ace")])
+    asking_player = Player.new("Connor", [Card.new("ace"), Card.new("ace")])
     asked_rank = "ace"
-    asked_player = Player.new("Matthew", [Card.new("ace")])
+    asked_player = Player.new("Matthew", [Card.new("ace"), Card.new("ace")])
     @game.play_round(asking_player, asked_rank, asked_player)
     expect(asking_player.cards_left).to eq(4)
     expect(asking_player.books).to eq(1)
