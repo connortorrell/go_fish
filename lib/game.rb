@@ -23,4 +23,13 @@ class Game
       end
     end
   end
+
+  def play_round(asking_player, asked_rank, asked_player)
+    if asked_player.has_card?(asked_rank)
+      asking_player.take_cards(asked_player.give_cards(asked_rank))
+    else
+      asking_player.take_cards([deck.deal])
+      "Go Fish!"
+    end
+  end
 end
