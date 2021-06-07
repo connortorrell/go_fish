@@ -1,5 +1,5 @@
 class Card
-  attr_reader :rank, :suit
+  attr_reader :rank
 
   CARD_VALUES = {
     "2" => 1,
@@ -11,19 +11,18 @@ class Card
     "8" => 7,
     "9" => 8,
     "10" => 9,
-    "J" => 10,
-    "Q" => 11,
-    "K" => 12,
-    "A" => 13
+    "jack" => 10,
+    "queen" => 11,
+    "king" => 12,
+    "ace" => 13
   }
 
-  def initialize (rank, suit)
+  def initialize (rank)
     @rank = rank
-    @suit = suit
   end
 
   def == card
-    card.class == self.class && self.rank == card.rank && self.suit == card.suit
+    card.class == self.class && self.rank == card.rank
   end
 
   def value

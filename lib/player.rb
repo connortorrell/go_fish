@@ -1,3 +1,5 @@
+require_relative "card"
+
 class Player
   attr_reader :name, :hand
 
@@ -6,8 +8,18 @@ class Player
     @hand = hand
   end
 
-  def play_card
-    hand.pop
+  def has_card?(rank)
+    hand.include?(Card.new(rank))
+  end
+
+  def give_cards(rank)
+    cards = []
+    hand.each do |card|
+      if card.rank == rank
+        cards.push(hand.delete(card))
+      end
+    end
+    cards
   end
 
   def cards_left
@@ -15,7 +27,7 @@ class Player
   end
 
   def take_cards (cards)
-    hand.unshift(cards).flatten!
+    hand.concat(cards)
   end
 
   def books

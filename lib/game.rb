@@ -19,7 +19,7 @@ class Game
   def deal_cards(number_of_cards)
     number_of_cards.times do |i|
       players.each do |player|
-        player.take_cards(deck.deal)
+        player.take_cards([deck.deal])
       end
     end
   end

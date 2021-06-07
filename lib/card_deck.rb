@@ -10,11 +10,11 @@ class CardDeck
   end
 
   def build_deck
-    suits = ["S", "C", "D", "H"]
-    ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-    suits.each do |suit|
+    suits = 4
+    ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace"]
+    suits.times do
       ranks.each do |rank|
-        cards.push(Card.new(rank, suit))
+        cards.push(Card.new(rank))
       end
     end
   end
