@@ -43,7 +43,7 @@ class Server
 
   def send_start_messages(game)
     puts "Game started"
-    send_global_message(game, "Game started")
+    send_message(game, "Game started")
   end
 
   def capture_output(client, delay=0.1)
@@ -58,7 +58,7 @@ class Server
     until game.winner do
       game.play
     end
-    send_global_message("Winner: #{game.winner.name}")
+    send_message("Winner: #{game.winner.name}")
     close_clients(game)
   end
 
@@ -69,14 +69,10 @@ class Server
     client_input
   end
 
-  def send_global_message game, message
+  def send_message game, message
     game.people.each do |person|
       person.client.puts message
     end
-  end
-
-  def send_client_message game, client, message
-
   end
 
   def stop
