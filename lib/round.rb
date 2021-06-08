@@ -40,7 +40,7 @@ class Round
     current_person.player.hand.each_with_index do |card, i|
       send_message(current_person, "#{i + 1}. #{card.rank}")
     end
-    send_message(current_person, "Enter the number of the card would you like to fish: ")
+    send_message(current_person, "Enter the number of the card you would like to fish: ")
     current_person.player.hand[get_response.to_i - 1]
   end
 

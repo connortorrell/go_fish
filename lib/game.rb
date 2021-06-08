@@ -51,6 +51,18 @@ class Game
   end
 
   def winner
+    empty_hands = players.map { |player| player.hand == [] }
+    if !empty_hands.include?(false)
+      highest_books = 0
+      winner = nil
+      players.each do |player|
+        if player.books > highest_books
+          winner = player
+          highest_books = player.books
+        end
+      end
+      winner
+    end
   end
 
   def send_global_message(message)
