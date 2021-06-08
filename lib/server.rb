@@ -4,17 +4,13 @@ require_relative "person"
 require_relative "player"
 
 class Server
-  attr_accessor :games, :waiting_list, :server
+  attr_accessor :games, :waiting_list, :server, :port_number, :number_of_players
 
-  PLAYERS_PER_GAME = 3
-
-  def initialize
+  def initialize(port_number = 3336, number_of_players = 2)
     @games = []
     @waiting_list = []
-  end
-
-  def port_number
-    3336
+    @port_number = port_number
+    @number_of_players = number_of_players
   end
 
   def start
@@ -33,7 +29,7 @@ class Server
   end
 
   def create_game_if_possible
-    if waiting_list.count > 1
+    if waiting_list.count == number_of_players
       game = Game.new(waiting_list)
       games.push(game)
       self.waiting_list = []

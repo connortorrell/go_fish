@@ -1,6 +1,10 @@
 require_relative 'server'
 
-server = Server.new
+puts "Port number: "
+port_number = gets.chomp.to_i
+puts "Number of players: "
+number_of_players = gets.chomp.to_i
+server = Server.new(port_number, number_of_players)
 server.start
 while true do
   server.accept_new_client
