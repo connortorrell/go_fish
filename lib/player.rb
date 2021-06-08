@@ -29,6 +29,12 @@ class Player
     hand.count
   end
 
+  def check_cards_left(deck)
+    if cards_left == 0 && deck.cards_left > 0
+      take_cards([deck.deal])
+    end
+  end
+
   def take_cards (cards)
     hand.concat(cards)
     check_for_books

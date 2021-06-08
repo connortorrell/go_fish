@@ -63,11 +63,14 @@ class Round
   def fish_cards(current_player, fished_player, rank)
     cards = fished_player.give_cards(rank)
     current_player.take_cards(cards)
-    output = "#{current_player.name} took #{cards.count} #{rank}s from #{fished_player.name}"
+    current_player.check_cards_left(deck)
+    fished_player.check_cards_left(deck)
+    output = "#{current_player.name} took #{cards.count} #{rank}s from #{fished_player.name}. #{current_player.name} has #{current_player.books} books"
   end
 
   def draw_from_deck(player, fished_rank)
     player.take_cards([deck.deal])
-    output = "Go Fish! #{player.name} unsuccessfully fished for a #{fished_rank} and drew a card from the deck"
+    player.check_cards_left(deck)
+    output = "Go Fish! #{player.name} unsuccessfully fished for a #{fished_rank} and drew a card from the deck. #{player.name} has #{player.books} books"
   end
 end 
