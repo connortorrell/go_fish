@@ -46,6 +46,10 @@ class Game
     end
   end
 
+  def winner
+    false
+  end
+
   def send_global_message(message)
     clients.each do |client|
       client.puts message

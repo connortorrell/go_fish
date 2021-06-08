@@ -56,7 +56,7 @@ class Server
 
   def play_full_game(game)
     game.start
-    until false do
+    until game.winner do
       game.play
     end
     send_message("Winner: #{game.winner.name}")

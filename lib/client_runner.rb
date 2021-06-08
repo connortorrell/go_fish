@@ -6,7 +6,6 @@ print "Enter the port number: "
 port_number = gets.chomp.to_i
 client = Client.new(network, port_number)
 while true do
-  puts "Waiting for updates"
   output = ""
   until output != ""
     output = client.capture_output

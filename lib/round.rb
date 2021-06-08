@@ -19,18 +19,25 @@ class Round
   end
 
   def play
-    send_message(current_person, "Who would you like to fish from: ")
-    person_name = ""
-    until person_name != "" do
-      person_name = capture_output(current_person)
+    other_people.each_with_index do |person, i|
+      send_message(current_person, "#{i + 1}. #{person.player.name}")
     end
-    send_message(current_person, "What card would you like to fish: ")
-    rank = ""
-    until rank != "" do
-      rank = capture_output(current_person)
+    send_message(current_person, "Enter the number of the person you would like to fish from: ")
+    person_number = ""
+    until person_number != "" do
+      person_number = capture_output(current_person)
     end
-    person = other_people.find { |other_person| other_person.player.name == person_name}
-    ask(person, rank)
+    person = other_people[person_number.to_i - 1]
+    current_person.player.hand.each_with_index do |card, i|
+      send_message(current_person, "#{i + 1}. #{card.rank}")
+    end
+    send_message(current_person, "Enter the number of the card would you like to fish: ")
+    card_number = ""
+    until card_number != "" do
+      card_number = capture_output(current_person)
+    end
+    card = current_person.player.hand[card_number.to_i - 1]
+    ask(person, card.rank)
   end
 
   def ask(person, rank)
@@ -42,7 +49,7 @@ class Round
       "#{current_player.name} took #{cards.count} #{rank}s from #{player.name}"
     else
       current_player.take_cards([deck.deal])
-      "Go Fish! #{current_player.name} drew a card from the deck"
+      "Go Fish! #{current_player.name} unsuccessfully fished for a #{rank} and drew a card from the deck"
     end
   end
 end 
