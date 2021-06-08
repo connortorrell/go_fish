@@ -1,7 +1,7 @@
 require 'socket'
 
 class Client
-  attr_reader :socket, :output
+  attr_reader :socket
 
   def initialize(network = "localhost", port = 3336)
     @socket = TCPSocket.new(network, port)
@@ -13,9 +13,9 @@ class Client
 
   def capture_output(delay=0.1)
     sleep(delay)
-    @output = socket.read_nonblock(1000).chomp # not gets which blocks
+    socket.read_nonblock(1000).chomp # not gets which blocks
   rescue IO::WaitReadable
-    output = ""
+    ""
   end
 
   def close

@@ -1,4 +1,5 @@
 require_relative "card_deck"
+require_relative "round"
 
 class Game
   attr_reader :people, :deck
@@ -32,29 +33,28 @@ class Game
     end
   end
 
-  def play()
-    game.people.each do |person|
-      game.play(game, person)
+  def play
+    people.each do |person|
+      other_people = people - [person]
+      round = Round.new(deck, person, other_people)
+      result = round.play
+      until result.include?("Go Fish!") do
+        send_global_message(result)
+        result = round.play
+      end
+      send_global_message(result)
     end
-    client = person.client
-    player = person.player
-    send_global_message("Enter the player you wou")
-    client1_input=""
-    client2_input=""
-    until client1_input == "play" and client2_input == "play" do
-      client1_input = update_client_input(clients(game).first, client1_input)
-      client2_input = update_client_input(clients(game).last, client2_input)
+  end
+
+  def send_global_message(message)
+    clients.each do |client|
+      client.puts message
     end
-    number_of_cards = player.cards_left
-    until game.play_round(player, asked_rank, asked_player) == "Go Fish"
-      send_global_message(game, "#{player.name} took #{player.cards_left - number_of_cards} #{asked_rank}s from #{asked_player.name}")
-    end
-    send_global_message(game, "Go Fish! #{player.name} drew a card from the middle deck")
   end
 
   def close_clients
-    people.each do |person|
-      person.client.close
+    clients.each do |client|
+      client.close
     end
   end
 end

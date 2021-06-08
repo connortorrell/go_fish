@@ -1,6 +1,7 @@
 require 'socket'
 require_relative 'game'
 require_relative "person"
+require_relative "player"
 
 class Server
   attr_accessor :games, :waiting_list, :server
@@ -32,10 +33,10 @@ class Server
   end
 
   def create_game_if_possible
-    if waiting_list.length > 1
+    if waiting_list.count > 1
       game = Game.new(waiting_list)
       games.push(game)
-      waiting_list = []
+      self.waiting_list = []
       send_start_messages(game)
       game
     end
@@ -55,7 +56,7 @@ class Server
 
   def play_full_game(game)
     game.start
-    until game.winner do
+    until false do
       game.play
     end
     send_message("Winner: #{game.winner.name}")
