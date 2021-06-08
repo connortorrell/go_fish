@@ -20,7 +20,9 @@ describe 'Player' do
     expect(player.cards_left).to eq(4)
   end
 
-  it "returns number of books" do
+  it "checks for books" do
+    player.check_for_books
+    expect(player.cards_left).to eq(0)
     expect(player.books).to eq(1)
   end
 end

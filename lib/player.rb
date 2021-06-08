@@ -2,11 +2,12 @@ require_relative "card"
 
 class Player
   attr_reader :name
-  attr_accessor :hand
+  attr_accessor :hand, :books
 
   def initialize (name, hand = [])
     @name = name
     @hand = hand
+    @books = 0
   end
 
   def has_card?(rank)
@@ -30,14 +31,20 @@ class Player
 
   def take_cards (cards)
     hand.concat(cards)
+    check_for_books
   end
 
-  def books
+  def check_for_books
     rank_frequency = {}
     hand.each do |card|
       increase_rank_frequency(rank_frequency, card)
     end
-    rank_frequency.values.count(4)
+    rank_frequency.each do |rank, frequency|
+      if frequency == 4
+        hand.delete(Card.new(rank))
+        self.books += 1
+      end
+    end
   end
 
   def increase_rank_frequency(rank_frequency, card)
