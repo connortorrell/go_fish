@@ -1,8 +1,8 @@
 require_relative 'server'
 
-puts "Port number: "
+print "Port number: "
 port_number = gets.chomp.to_i
-puts "Number of players: "
+print "Number of players: "
 number_of_players = gets.chomp.to_i
 server = Server.new(port_number, number_of_players)
 server.start

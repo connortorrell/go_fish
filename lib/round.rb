@@ -14,7 +14,7 @@ class Round
     ""
   end
 
-  def send_message person, message
+  def send_message (person, message)
     person.client.puts message
   end
 
