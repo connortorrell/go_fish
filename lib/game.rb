@@ -33,21 +33,24 @@ class Game
     end
   end
 
+  def play_round(round)
+    result = round.play
+    until result.include?("Go Fish!") do
+      send_global_message(result)
+      result = round.play
+    end
+    send_global_message(result)
+  end
+
   def play
     people.each do |person|
       other_people = people - [person]
       round = Round.new(deck, person, other_people)
-      result = round.play
-      until result.include?("Go Fish!") do
-        send_global_message(result)
-        result = round.play
-      end
-      send_global_message(result)
+      play_round(round)
     end
   end
 
   def winner
-    false
   end
 
   def send_global_message(message)

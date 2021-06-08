@@ -10,8 +10,10 @@ while true do
   until output != ""
     output = client.capture_output
   end
-  puts output
-  if output.include?(":")
+  if output.include?(": ")
+    print output
     client.provide_input(gets.chomp)
+  else
+    puts output
   end
 end

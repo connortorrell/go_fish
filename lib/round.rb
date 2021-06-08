@@ -27,6 +27,7 @@ class Round
   end
 
   def ask_for_player_to_fish
+    send_message(current_person, "Players to fish from:")
     other_people.each_with_index do |person, i|
       send_message(current_person, "#{i + 1}. #{person.player.name}")
     end
@@ -35,6 +36,7 @@ class Round
   end
 
   def ask_for_card_to_fish
+    send_message(current_person, "Cards to fish:")
     current_person.player.hand.each_with_index do |card, i|
       send_message(current_person, "#{i + 1}. #{card.rank}")
     end
@@ -46,13 +48,6 @@ class Round
     person_to_fish = ask_for_player_to_fish
     card_to_fish = ask_for_card_to_fish
     ask(person_to_fish, card_to_fish.rank)
-  end
-
-  def send_round_question()
-    other_people.each_with_index do |person, i|
-      send_message(current_person, "#{i + 1}. #{person.player.name}")
-    end
-    send_message(current_person, "Enter the number of the person you would like to fish from: ")
   end
 
   def ask(person, rank)
